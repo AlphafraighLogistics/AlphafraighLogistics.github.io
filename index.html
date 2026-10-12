@@ -148,6 +148,9 @@ footer {
     font-size: 12px;
 }
 </style>
+<!-- Firebase libraries -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
 <header>
@@ -176,7 +179,7 @@ footer {
     </div>
     <div id="result" class="result">
         <div class="card">
-            <span class="status">IN TRANSIT</span>
+          <span class="status" id="shipmentStatus">IN TRANSIT</span>
             <h2>Shipment Details</h2>
             <div class="details">
                 <div class="detail">
@@ -193,11 +196,11 @@ footer {
                 </div>
                 <div class="detail">
                     <div class="label">Current Location</div>
-                    <div class="value">Atlantic Ocean</div>
+                   <div class="value" id="currentLocation">Atlantic Ocean</div>
                 </div>
                 <div class="detail">
                     <div class="label">Estimated Transit</div>
-                    <div class="value">65 Days</div>
+                   <div class="value" id="estimatedDelivery">65 Days</div> 
                 </div>
             </div>
             <h2>Shipment Progress</h2>
@@ -258,22 +261,63 @@ footer {
     © 2026 Alpha Freight & Logistics
 </footer>
 <script>
-function trackShipment() {
+async function trackShipment() {
     const input = document
         .getElementById("trackingNumber")
         .value
         .trim()
         .toUpperCase();
+
     const result = document.getElementById("result");
     const error = document.getElementById("error");
-    if (input === "AFL-2026-OD-CIN-847291") {
+
+    result.style.display = "none";
+    error.style.display = "none";
+
+    try {
+        const snapshot = await db
+            .collection("shipments")
+            .where("trackingNumber", "==", input)
+            .limit(1)
+            .get();
+
+        if (snapshot.empty) {
+            error.style.display = "block";
+            return;
+        }
+
+        const shipment = snapshot.docs[0].data();
+
         result.style.display = "block";
-        error.style.display = "none";
-    } else {
-        result.style.display = "none";
+
+        // Update these IDs to match your existing result section.
+        const location = document.getElementById("currentLocation");
+        const status = document.getElementById("shipmentStatus");
+        const delivery = document.getElementById("estimatedDelivery");
+
+        if (location) location.textContent = shipment.currentLocation || "Updating";
+        if (status) status.textContent = shipment.status || "Processing";
+        if (delivery) delivery.textContent = shipment.estimatedDelivery || "To be confirmed";
+
+    } catch (err) {
+        console.error("Tracking error:", err);
+        error.textContent = "Unable to retrieve tracking information. Please try again.";
         error.style.display = "block";
     }
 }
+// Firebase connection
+const firebaseConfig = {
+  apiKey: "AIzaSyDuHMXPUitxR61e3DcDCJYNv9T5j4AuP1U",
+  authDomain: "alpha-freight-and-logistics.firebaseapp.com",
+  projectId: "alpha-freight-and-logistics",
+  storageBucket: "alpha-freight-and-logistics.firebasestorage.app",
+  messagingSenderId: "178103780607",
+  appId: "1:178103780607:web:aacfff69e94c65a8fa38ca"
+};if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+const db = firebase.firestore();
 </script>
 </body>
 </html>
