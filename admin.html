@@ -280,43 +280,48 @@ async function adminLogin() {
         error.textContent = "Login failed. Check your email and password.";
     }
 }
-    function saveShipment() {
+   async function saveShipment() {
+    const tracking = document.getElementById("tracking").value.trim().toUpperCase();
+    const status = document.getElementById("status").value.trim();
+    const location = document.getElementById("location").value.trim();
+    const update = document.getElementById("update").value.trim();
 
-    const tracking =
-        document.getElementById("tracking").value;
+    const success = document.getElementById("success");
 
-    const status =
-        document.getElementById("status").value;
+    if (!tracking || !status || !location) {
+        alert("Please enter the tracking number, status, and location.");
+        return;
+    }
 
-    const location =
-        document.getElementById("location").value;
+    if (!auth.currentUser ||
+        !auth.currentUser.email ||
+        auth.currentUser.email.toLowerCase() !== "alphafreightandlogistics@hotmail.com") {
+        alert("Please sign in with the administrator account.");
+        return;
+    }
 
-    const update =
-        document.getElementById("update").value;
+    try {
+        await db.collection("shipments").doc(tracking).set({
+            trackingNumber: tracking,
+            status: status,
+            currentLocation: location,
+            lastUpdate: update,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
 
-    document.getElementById("showTracking").textContent =
-        tracking;
+        document.getElementById("showTracking").textContent = tracking;
+        document.getElementById("showStatus").textContent = status;
+        document.getElementById("showLocation").textContent = location;
+        document.getElementById("showUpdate").textContent = update;
 
-    document.getElementById("showStatus").textContent =
-        status;
+        success.textContent = "Shipment information saved successfully.";
+        success.style.display = "block";
 
-    document.getElementById("showLocation").textContent =
-        location;
-
-    document.getElementById("showUpdate").textContent =
-        update;
-
-    document.getElementById("success").style.display =
-        "block";
-
-    setTimeout(function() {
-
-        document.getElementById("success").style.display =
-            "none";
-
-    }, 3000);
+    } catch (error) {
+        console.error("Save shipment error:", error);
+        alert("Unable to save shipment. Check your administrator login and Firebase settings.");
+    }
 }
-
 </script>
 
 </body>
