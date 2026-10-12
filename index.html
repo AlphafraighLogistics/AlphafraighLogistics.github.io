@@ -276,12 +276,10 @@ async function trackShipment() {
 
     try {
         const snapshot = await db
-            .collection("shipments")
-            .where("trackingNumber", "==", input)
-            .limit(1)
-            .get();
-
-        if (snapshot.empty) {
+    .collection("shipments")
+    .doc(input)
+    .get();
+       if (!snapshot.exists) {
             error.style.display = "block";
             return;
         }
