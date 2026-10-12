@@ -284,7 +284,7 @@ async function trackShipment() {
             return;
         }
 
-        const shipment = snapshot.docs[0].data();
+        const shipment = snapshot.data();
 
         result.style.display = "block";
 
