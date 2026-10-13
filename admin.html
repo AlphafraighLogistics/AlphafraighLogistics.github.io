@@ -179,7 +179,8 @@ button:hover {
         >
 
         <label>Latest Update</label>
-
+<label for="estimatedDelivery">Estimated Delivery Date</label>
+<input type="text" id="estimatedDelivery" placeholder="e.g. 15 October 2026">
         <textarea id="update">Shipment is currently in transit.</textarea>
 
         <button onclick="saveShipment()">
@@ -222,6 +223,9 @@ button:hover {
             <span id="showUpdate">
                 Shipment is currently in transit.
             </span>
+           <p><strong>Estimated Delivery:</strong>
+    <span id="showDelivery">Not set</span>
+</p> 
         </div>
 
     </div>
@@ -285,7 +289,7 @@ async function adminLogin() {
     const status = document.getElementById("status").value.trim();
     const location = document.getElementById("location").value.trim();
     const update = document.getElementById("update").value.trim();
-
+const delivery = document.getElementById("estimatedDelivery").value.trim();
     const success = document.getElementById("success");
 
     if (!tracking || !status || !location) {
@@ -306,6 +310,7 @@ async function adminLogin() {
             status: status,
             currentLocation: location,
             lastUpdate: update,
+            estimatedDelivery: delivery,
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
@@ -313,6 +318,7 @@ async function adminLogin() {
         document.getElementById("showStatus").textContent = status;
         document.getElementById("showLocation").textContent = location;
         document.getElementById("showUpdate").textContent = update;
+        document.getElementById("showDelivery").textContent = delivery || "Not set";
 
         success.textContent = "Shipment information saved successfully.";
         success.style.display = "block";
