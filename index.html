@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpha Freight & Logistics — Shipment Tracking</title>
+<title>Alpha Freight & Logistics | Shipment Tracking</title>
 <style>
 * {
     box-sizing: border-box;
@@ -355,16 +355,16 @@ async function trackShipment() {
             timeline.innerHTML = "";
 
             history.forEach(item => {
-              const entry = document.createElement(“div”);
-entry.style.padding = “14px 16px”;
-entry.style.borderBottom = “1px solid #e5e7eb”;
-entry.style.borderLeft = “3px solid #2563eb”;
-entry.style.transition = “background 0.2s ease, border-color 0.2s ease”;
-entry.style.overflow = “hidden”;
-entry.style.borderRadius = “10px”;
-entry.style.background = “#ffffff”;
-entry.style.marginBottom = “12px”;
-entry.style.boxShadow = “0 2px 6px rgba(0, 0, 0, 0.05)”;
+              const entry = document.createElement("div");
+entry.style.padding = "14px 16px";
+entry.style.borderBottom = "1px solid #e5e7eb";
+entry.style.borderLeft = "3px solid #2563eb";
+entry.style.transition = "background 0.2s ease, border-color 0.2s ease";
+entry.style.overflow = "hidden";
+entry.style.borderRadius = "10px";
+entry.style.background = "#ffffff";
+entry.style.marginBottom = "12px";
+entry.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.05)";
                 const heading = document.createElement("strong");
                 heading.textContent = item.status || "Shipment update";
 heading.style.display = "inline-block";
@@ -414,8 +414,11 @@ timeline.appendChild(entry);
         console.error("Tracking error:", err);
         error.textContent = "Unable to retrieve tracking information. Please try again.";
         error.style.display = "block";
-    }
+ }
 }
+</script>
+
+<script>
 // Firebase connection
 const firebaseConfig = {
   apiKey: "AIzaSyDuHMXPUitxR61e3DcDCJYNv9T5j4AuP1U",
