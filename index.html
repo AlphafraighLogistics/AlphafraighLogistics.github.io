@@ -204,7 +204,7 @@ footer {
                 </div>
             </div>
             <h2>Shipment Progress</h2>
-            <div class="timeline">
+          <div class="timeline" id="shipmentHistory">
                 <div class="event">
                     <strong>Shipment Created</strong>
                     <span>Shipment record created</span>
@@ -296,6 +296,31 @@ async function trackShipment() {
         if (location) location.textContent = shipment.currentLocation || "Updating";
         if (status) status.textContent = shipment.status || "Processing";
         if (delivery) delivery.textContent = shipment.estimatedDelivery || "To be confirmed";
+        const history = shipment.history || [];
+        const timeline = document.getElementById("shipmentHistory");
+
+        if (timeline) {
+            timeline.innerHTML = "";
+
+            history.forEach(item => {
+                const entry = document.createElement("div");
+                entry.style.padding = "10px";
+                entry.style.borderBottom = "1px solid #ddd";
+
+                const heading = document.createElement("strong");
+                heading.textContent = item.status || "Shipment update";
+
+                const details = document.createElement("p");
+                details.textContent =
+                    (item.currentLocation || "Location updating") +
+                    " — " +
+                    (item.lastUpdate || "No additional details");
+
+                entry.appendChild(heading);
+                entry.appendChild(details);
+                timeline.appendChild(entry);
+            });
+        }
 
     } catch (err) {
         console.error("Tracking error:", err);
