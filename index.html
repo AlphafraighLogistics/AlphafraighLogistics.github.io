@@ -9,16 +9,19 @@
     box-sizing: border-box;
 }
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f5f7;
-    color: #17202a;
+font-family: Arial, Helvetica, sans-serif;
+background: #f1f5f9;
+color: #1f2937;
+margin: 0;
+padding: 0;
+line-height: 1.6;
 }
 header {
-    background: #111827;
-    color: white;
-    padding: 22px 18px;
-    text-align: center;
+background: #111827;
+color: #ffffff;
+padding: 28px 20px;
+text-align: center;
+border-bottom: 4px solid #2563eb;
 }
 .logo {
     font-size: 25px;
@@ -31,23 +34,29 @@ header {
     color: #cbd5e1;
 }
 .container {
-    max-width: 850px;
-    margin: 30px auto;
-    padding: 0 16px;
+max-width: 800px;
+width: calc(100% - 32px);
+margin: 30px auto;
+box-sizing: border-box;
 }
 .card {
-    background: white;
-    border-radius: 14px;
-    padding: 24px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
+background: #ffffff;
+border: 1px solid #e5e7eb;
+border-radius: 14px;
+padding: 24px;
+margin-bottom: 24px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 h1 {
     margin-top: 0;
     font-size: 25px;
 }
 h2 {
-    font-size: 19px;
+color: #111827;
+font-size: 22px;
+font-weight: 700;
+line-height: 1.4;
+margin-bottom: 18px;
 }
 .search-box {
     display: flex;
@@ -55,24 +64,29 @@ h2 {
     flex-wrap: wrap;
 }
 input {
-    flex: 1;
-    min-width: 220px;
-    padding: 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 15px;
+width: 100%;
+padding: 14px 16px;
+margin: 10px 0 16px;
+border: 1px solid #cbd5e1;
+border-radius: 8px;
+box-sizing: border-box;
+font-size: 15px;
+outline: none;
 }
 button {
-    padding: 14px 22px;
-    border: none;
-    border-radius: 8px;
-    background: #111827;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+width: 100%;
+padding: 14px 18px;
+background: #2563eb;
+color: #ffffff;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+font-weight: 700;
+cursor: pointer;
+transition: background 0.2s ease;
 }
 button:hover {
-    background: #374151;
+background: #1d4ed8;
 }
 .result {
     display: none;
@@ -107,46 +121,48 @@ button:hover {
     font-weight: bold;
 }
 .timeline {
-    border-left: 3px solid #2563eb;
-    margin: 25px 0 0 8px;
-    padding-left: 22px;
-    position: relative;
+border-left: 3px solid #2563eb;
+margin: 28px 0 0 8px;
+padding-left: 22px;
+position: relative;
 }
 .event {
-    position: relative;
-    margin-bottom: 26px;
-    padding: 14px 16px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+position: relative;
+margin-bottom: 26px;
+padding: 16px 18px;
+background: #ffffff;
+border: 1px solid #e5e7eb;
+border-radius: 12px;
+box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .event::before {
-    content: "";
-    position: absolute;
-    left: -31px;
-    top: 18px;
-    width: 12px;
-    height: 12px;
-    background: #2563eb;
-    border: 3px solid #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 0 0 2px #2563eb;
+content: “”;
+position: absolute;
+left: -31px;
+top: 18px;
+width: 12px;
+height: 12px;
+background: #2563eb;
+border: 3px solid #ffffff;
+border-radius: 50%;
+box-shadow: 0 0 0 2px #2563eb;
 }
+
 .event strong {
-    display: block;
-    margin-bottom: 8px;
-    color: #111827;
-    font-size: 15px;
-    font-weight: 700;
+display: block;
+margin-bottom: 8px;
+color: #111827;
+font-size: 15px;
+font-weight: 700;
 }
 
 .event span {
-    display: block;
-    color: #64748b;
-    font-size: 13px;
-    line-height: 1.6;
+display: block;
+color: #64748b;
+font-size: 13px;
+line-height: 1.6;
 }
 .error {
     display: none;
@@ -161,6 +177,27 @@ footer {
     padding: 25px;
     color: #64748b;
     font-size: 12px;
+}
+@media (max-width: 600px) {
+.container {
+width: calc(100% - 24px);
+margin: 18px auto;
+}
+
+.card {
+    padding: 18px;
+    border-radius: 10px;
+}
+header {
+    padding: 22px 16px;
+}
+h2 {
+    font-size: 20px;
+}
+.timeline {
+    padding-left: 18px;
+}
+
 }
 </style>
 <!-- Firebase libraries -->
