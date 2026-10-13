@@ -311,6 +311,12 @@ const delivery = document.getElementById("estimatedDelivery").value.trim();
             currentLocation: location,
             lastUpdate: update,
             estimatedDelivery: delivery,
+            history: firebase.firestore.FieldValue.arrayUnion({
+    status: status,
+    currentLocation: location,
+    lastUpdate: update,
+    updatedAt: new Date().toISOString()
+}),
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
