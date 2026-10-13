@@ -107,31 +107,46 @@ button:hover {
     font-weight: bold;
 }
 .timeline {
-    border-left: 3px solid #111827;
+    border-left: 3px solid #2563eb;
     margin: 25px 0 0 8px;
     padding-left: 22px;
+    position: relative;
 }
 .event {
     position: relative;
-    margin-bottom: 23px;
+    margin-bottom: 26px;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
+
 .event::before {
     content: "";
     position: absolute;
     left: -31px;
-    top: 2px;
+    top: 18px;
     width: 12px;
     height: 12px;
-    background: #111827;
+    background: #2563eb;
+    border: 3px solid #ffffff;
     border-radius: 50%;
+    box-shadow: 0 0 0 2px #2563eb;
 }
 .event strong {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 700;
 }
+
 .event span {
+    display: block;
     color: #64748b;
     font-size: 13px;
+    line-height: 1.6;
 }
 .error {
     display: none;
