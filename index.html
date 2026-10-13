@@ -318,23 +318,48 @@ async function trackShipment() {
             timeline.innerHTML = "";
 
             history.forEach(item => {
-                const entry = document.createElement("div");
-                entry.style.padding = "10px";
-                entry.style.borderBottom = "1px solid #ddd";
-
+              const entry = document.createElement(“div”);
+entry.style.padding = “14px 16px”;
+entry.style.borderBottom = “1px solid #e5e7eb”;
+entry.style.borderLeft = “3px solid #2563eb”;
+entry.style.transition = “background 0.2s ease, border-color 0.2s ease”;
+entry.style.overflow = “hidden”;
+entry.style.borderRadius = “10px”;
+entry.style.background = “#ffffff”;
+entry.style.marginBottom = “12px”;
+entry.style.boxShadow = “0 2px 6px rgba(0, 0, 0, 0.05)”;
                 const heading = document.createElement("strong");
                 heading.textContent = item.status || "Shipment update";
+heading.style.display = "inline-block";
+heading.style.padding = "5px 10px";
+heading.style.borderRadius = "6px";
+heading.style.background = "#dbeafe";
+heading.style.border = "1px solid #bfdbfe";
+heading.style.fontWeight = "700";                
+heading.style.color = "#1d4ed8";
+heading.style.fontSize = "12px";
+heading.style.letterSpacing = "0.5px";
 
                 const details = document.createElement("p");
+                details.style.margin = "10px 0";
+details.style.color = "#334155";
+details.style.lineHeight = "1.6";
+ details.style.fontSize = "14px";               
                details.textContent =
     (item.currentLocation || "Location updating") +
     " — " +
     (item.lastUpdate || "No additional details");
 
 const date = document.createElement("small");
+                date.style.paddingTop = "6px";
+date.style.borderTop = "1px solid #e2e8f0";
+date.style.fontWeight = "500";
+date.style.color = "#64748b";                
 date.style.display = "block";
 date.style.marginTop = "6px";
-date.style.color = "#666";
+date.style.color = "#64748b";
+date.style.fontSize = "12px";
+date.style.lineHeight = "1.6";
 date.textContent = item.updatedAt
     ? "Updated: " + new Date(item.updatedAt).toLocaleString()
     : "Date not available";
