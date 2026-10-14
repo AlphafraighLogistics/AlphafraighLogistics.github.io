@@ -158,6 +158,9 @@ button:hover {
             id="tracking"
             value="AFL-2026-OD-CIN-0973"
         >
+       <button type="button" onclick="loadShipment()">
+    Load Shipment
+</button>
 
         <label>Status</label>
 
@@ -332,6 +335,42 @@ const delivery = document.getElementById("estimatedDelivery").value.trim();
     } catch (error) {
         console.error("Save shipment error:", error);
         alert("Unable to save shipment. Check your administrator login and Firebase settings.");
+    }
+}
+async function loadShipment() {
+    const tracking = document.getElementById("tracking").value.trim().toUpperCase();
+
+    if (!tracking) {
+        alert("Please enter a tracking number.");
+        return;
+    }
+
+    try {
+        const doc = await db.collection("shipments").doc(tracking).get();
+
+        if (!doc.exists) {
+            alert("Shipment not found.");
+            return;
+        }
+
+        const shipment = doc.data();
+
+        document.getElementById("tracking").value = shipment.trackingNumber || tracking;
+        document.getElementById("status").value = shipment.status || "PROCESSING";
+        document.getElementById("location").value = shipment.currentLocation || "";
+        document.getElementById("update").value = shipment.lastUpdate || "";
+        document.getElementById("estimatedDelivery").value = shipment.estimatedDelivery || "";
+
+        document.getElementById("showTracking").textContent = shipment.trackingNumber || tracking;
+        document.getElementById("showStatus").textContent = shipment.status || "";
+        document.getElementById("showLocation").textContent = shipment.currentLocation || "";
+        document.getElementById("showUpdate").textContent = shipment.lastUpdate || "";
+        document.getElementById("showDelivery").textContent = shipment.estimatedDelivery || "Not set";
+
+        alert("Shipment loaded successfully.");
+    } catch (error) {
+        console.error("Load shipment error:", error);
+        alert("Unable to load shipment. Check your administrator login and Firebase settings.");
     }
 }
 </script>
