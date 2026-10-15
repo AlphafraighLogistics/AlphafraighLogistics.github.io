@@ -363,7 +363,7 @@ async function loadShipment() {
         document.getElementById("update").value = shipment.lastUpdate || "";
         document.getElementById("estimatedDelivery").value = shipment.estimatedDelivery || "";
 
-        document.getElementById("showTracking").textContent = shipment.trackingNumber || tracking;
+       document.getElementById("showTracking").textContent = tracking;
         document.getElementById("showStatus").textContent = shipment.status || "";
         document.getElementById("showLocation").textContent = shipment.currentLocation || "";
         document.getElementById("showUpdate").textContent = shipment.lastUpdate || "";
