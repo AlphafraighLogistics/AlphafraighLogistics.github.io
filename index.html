@@ -371,7 +371,7 @@ async function trackShipment() {
         }
 
         const shipment = snapshot.data();
-        document.getElementById("displayTrackingNumber").textContent = shipment.trackingNumber || tracking;
+       document.getElementById("displayTrackingNumber").textContent = shipment.trackingNumber || input;
 
         result.style.display = "block";
 
